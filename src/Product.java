@@ -2,6 +2,7 @@ public class Product {
     private String name;
     private double price;
     private int quantity;
+    private String unit;
 
     /**
      * Product class constructor 
@@ -9,7 +10,7 @@ public class Product {
      * @param price price of the item 
      * @param quantity number of items 
      */
-    public Product(String name, double price, int quantity) {
+    public Product(String name, double price, int quantity, String unit) {
         if (name == null || name.trim().isEmpty()){
             throw new IllegalArgumentException("Product name cannot be null or empty.");
         }
@@ -19,9 +20,13 @@ public class Product {
         if (quantity < 0){
             throw new IllegalArgumentException("Cannot have negative quantity of item.");
         }
+        if (unit == null || unit.trim().isEmpty()){
+            throw new IllegalArgumentException("Must be a valid unit of measurement");
+        }
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.unit = unit;
     }
 
     /**
@@ -46,6 +51,10 @@ public class Product {
      */
     public int getQuantity(){
         return quantity;
+    }
+
+    public String getUnit(){
+        return unit;
     }
 
     /**
@@ -84,9 +93,14 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public void setUnit(String unit){
+        this.unit = unit;
+    }
+
     @Override
     public String toString(){
-        return "Product: " + name + " | Price: $" + price + " | Quantity: " + quantity;  
+        return String.format("Product: %10s | Price: $%5.2f | Quantity: %5d | Unit: %5s" ,name, price, quantity, unit);
+        // return "Product: " + name + " | Price: $" + price + " | Quantity: " + quantity + " | Unit: " + unit;  
     }
 }
 

@@ -90,6 +90,23 @@ public class Inventory {
         System.out.println("Error: Product '" + name + "' not found in inventory.");
     }
 
+    public void updatePrice(String name, double price){
+        if (name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("Product name cannot be null or empty.");
+        }
+        if (price < 0.0){
+            throw new IllegalArgumentException("Price cannot be negative.");
+        }
+        for (Product p : productsList) {
+            if (p.getName().equalsIgnoreCase(name)){
+                p.setPrice(price);
+                System.out.println(name + " price updated to $" + price + ".");
+                return;
+            }
+        }
+        System.out.println("Error: Product '" + name + "' not found in inventory.");
+
+    }
     /**
      * List out the inventory
      */
